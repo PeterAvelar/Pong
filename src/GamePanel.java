@@ -63,12 +63,37 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	
 	public void checkCollision() {
+		//Bounces ball off paddles
+		if(ball.intersects(paddle1)) {
+			ball.xVelocity = Math.abs(ball.xVelocity);		
+			ball.xVelocity++; // Optinal for more dificulty
+			if(ball.yVelocity > 0)
+				ball.yVelocity++;// Optinal for more dificulty
+			else
+				ball.yVelocity--;
+			ball.setXDirection(ball.xVelocity);
+			ball.setYDirection(ball.yVelocity);
+		}
+		
+		if(ball.intersects(paddle2)) {
+			ball.xVelocity = Math.abs(ball.xVelocity);		
+			ball.xVelocity++; // Optinal for more dificulty
+			if(ball.yVelocity > 0)
+				ball.yVelocity++;// Optinal for more dificulty
+			else
+				ball.yVelocity--;
+			ball.setXDirection(-ball.xVelocity);
+			ball.setYDirection(-ball.yVelocity);
+		}
+		
 		//Boounce ball off top and bottom window edges
 		if(ball.y <= 0) {
 			ball.setYDirection(-ball.yVelocity);
 		}
 		
-		//if(ball.y )
+		if(ball.y >= GAME_HEIGHT-BALL_DIAMETER) {
+			ball.setYDirection(-ball.yVelocity);
+		}
 		
 		//Stops paddle at widow edges
 		if(paddle1.y<=0)
